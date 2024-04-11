@@ -16,4 +16,5 @@ export interface User extends MongoInterface {
     type: "admin" | "negocio" | "cadete";
     creationStatus?: "creado" | "borrado";
     accessStatus?: "habilitado" | "desabilitado";
+    token?: string;
 }

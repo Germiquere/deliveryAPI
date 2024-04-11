@@ -24,14 +24,16 @@ export const validateRoute = {
             .isString()
             .withMessage("El nombre debe ser un string"),
     ],
-    // login: [
-    //     check("email", "El email es obligatorio").isEmail(),
-    //     check(
-    //         "password",
-    //         "La contraseña debe de tener minimo 8 caracteres y al menos 1 mayuscula"
-    //     ).isLength({ min: 8 }),
-    //     // .matches(/[A-Z]/, "g")
-    // ],
+    login: [
+        check("email", "El email es obligatorio").isEmail(),
+        check(
+            "password",
+            "La contraseña debe de tener minimo 8 caracteres y al menos 1 mayuscula"
+        )
+            .trim()
+            .isLength({ min: 8 }),
+        // .matches(/[A-Z]/, "g")
+    ],
     // createUpdate: [
     //     check(
     //         "startDate",
