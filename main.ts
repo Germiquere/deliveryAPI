@@ -3,6 +3,7 @@ import { config } from "./config/config";
 import dotenv from "dotenv";
 import { dataBaseConnection } from "./database/mongoClient";
 import { router as userRouter } from "./routes/UserRoutes";
+import cors from "cors";
 //======================================================
 //app Initializations
 
@@ -14,6 +15,7 @@ dataBaseConnection();
 //======================================================
 // middlewares
 app.use(express.json());
+app.use(cors());
 //======================================================
 //rutas
 

@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
-import { User } from "../interfaces/interfaces";
+import { TokenData, User } from "../interfaces/interfaces";
 import { config } from "../config/config";
-export const generateAuthToken = (user: User) => {
-    const payload = {
-        id: user.id,
-        email: user.email,
-        type: user.type,
+export const generateAuthToken = (data: TokenData) => {
+    const payload: TokenData = {
+        id: data.id,
+        email: data.email,
+        type: data.type,
     };
     return jwt.sign(payload, config.secretSeed!, { expiresIn: "5h" });
 };

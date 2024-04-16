@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { UserDao } from "../dao/UserDao";
-import { User } from "../interfaces/interfaces";
+import { TokenData, User } from "../interfaces/interfaces";
 import { crypto } from "../utils/crypto";
 import { encryptPassword, matchPassword } from "../utils/bcrypt";
 import { generateAuthToken } from "../utils/jwt";
@@ -40,7 +40,29 @@ export const loginUser = async (req: Request) => {
         if (!validPassword) {
             throw "Alguno de los datos ingresados no es valido";
         }
-        userExists.token = generateAuthToken(userExists);
+        const payload: TokenData = {
+            id: userExists.id,
+            email: userExists.email,
+            type: userExists.type,
+        };
+        userExists.token = generateAuthToken(payload);
+        return userExists;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+export const loginUserByToken = async (req: Request) => {
+    try {
+        const userExists = await userInstance.findByEmail(req.email);
+        if (!userExists) {
+            throw "El usuario no existe";
+        }
+        const payload: TokenData = {
+            id: req.id,
+            email: req.email,
+            type: req.type,
+        };
+        userExists.token = generateAuthToken(payload);
         return userExists;
     } catch (error: any) {
         throw new Error(error);

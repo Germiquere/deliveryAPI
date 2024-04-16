@@ -18,3 +18,8 @@ export interface User extends MongoInterface {
     accessStatus?: "habilitado" | "desabilitado";
     token?: string;
 }
+export interface TokenData {
+    id: string;
+    email: string;
+    type: string;
+}
